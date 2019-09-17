@@ -40,23 +40,26 @@
 	 * });
 	 */
 	Store.prototype.find = function(query, callback) {
-		if (!callback) {
-			return;
-		}
+		// amélioration
+		// if (!callback) {
+		// 	return;
+		// }
 
-		var todos = JSON.parse(localStorage[this._dbName]).todos;
+		if (callback) {
+			var todos = JSON.parse(localStorage[this._dbName]).todos;
 
-		callback.call(
-			this,
-			todos.filter(function(todo) {
-				for (var q in query) {
-					if (query[q] !== todo[q]) {
-						return false;
+			callback.call(
+				this,
+				todos.filter(function(todo) {
+					for (var q in query) {
+						if (query[q] !== todo[q]) {
+							return false;
+						}
 					}
-				}
-				return true;
-			})
-		);
+					return true;
+				})
+			);
+		}
 	};
 
 	/**
@@ -84,6 +87,8 @@
 		callback = callback || function() {};
 
 		// If an ID was actually given, find the item and update each property
+		// if (id) {
+
 		if (id) {
 			for (var i = 0; i < todos.length; i++) {
 				if (todos[i].id === id) {
