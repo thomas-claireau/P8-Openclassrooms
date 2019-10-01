@@ -90,7 +90,7 @@ describe('controller', function() {
 			// TODO: write test
 			const todo = { title: 'todoTest', completed: false }; // créer un objet todo avec la propriété completed à false
 			setUpModel([todo]); // initialiser le modèle avec l'objet todo
-			subject.setView('#/active'); // initialiser la vue avec seulement les todos actives
+			subject.setView('#/active'); // initialiser la vue en affichant seulement les todos actives
 
 			// doit retourner true si le model trouve la todo testée (le paramètre completed)
 			expect(model.read).toHaveBeenCalledWith({ completed: false }, jasmine.any(Function));
@@ -103,7 +103,7 @@ describe('controller', function() {
 			// TODO: write test
 			const todo = { title: 'todoTest', completed: true }; // créer un objet todo avec la propriété completed à true
 			setUpModel([todo]); // initialiser le modèle avec l'objet todo
-			subject.setView('#/completed'); // initialiser la vue avec seulement les todos complétées
+			subject.setView('#/completed'); // initialiser la vue en affichant seulement les todos complétées
 
 			// doit retourner true si le model trouve la todo testée (le paramètre completed)
 			expect(model.read).toHaveBeenCalledWith({ completed: true }, jasmine.any(Function));
@@ -171,7 +171,7 @@ describe('controller', function() {
 		const filterActive = 'active'; // le filtre pour afficher les todos actives
 
 		setUpModel([]); // initialiser le modèle
-		subject.setView('#/' + filterActive); // initialiser la vue avec le filtre pour afficher les todos actives
+		subject.setView('#/' + filterActive); // initialiser la vue avec le filtre pour afficher seulement les todos actives
 
 		// l'application s'attend à ce que la vue soit filtrée avec setFilter et le filtre pour afficher les todos actives
 		expect(view.render).toHaveBeenCalledWith('setFilter', filterActive);
@@ -193,6 +193,7 @@ describe('controller', function() {
 		});
 		it('should toggle all todos to completed', function() {
 			// TODO: write test
+			// actualiser le model en passant le paramètre completed des todos à true
 			for (let id = 1; id <= 3; id++) {
 				expect(model.update).toHaveBeenCalledWith(
 					id,
@@ -204,6 +205,7 @@ describe('controller', function() {
 
 		it('should update the view', function() {
 			// TODO: write test
+			// actualiser la vue après l'actualisation du model
 			for (let id = 1; id <= 3; id++) {
 				expect(view.render).toHaveBeenCalledWith('elementComplete', {
 					id: id,
@@ -216,11 +218,16 @@ describe('controller', function() {
 	describe('new todo', function() {
 		it('should add a new todo to the model', function() {
 			// TODO: write test
+			setUpModel([]); // initialiser le model
+			subject.setView(''); // initialiser la vue
+
+			// l'action de création d'une todo doit déclencher une création d'une todo dans le model
+			view.trigger('newTodo', 'a new todo');
+			expect(model.create).toHaveBeenCalledWith('a new todo', jasmine.any(Function));
 		});
 
 		it('should add a new todo to the view', function() {
 			setUpModel([]);
-
 			subject.setView('');
 
 			view.render.calls.reset();
@@ -260,6 +267,14 @@ describe('controller', function() {
 	describe('element removal', function() {
 		it('should remove an entry from the model', function() {
 			// TODO: write test
+			const todo = { id: 1, title: 'testTodo', completed: true }; // création d'une todo déja complétée
+
+			setUpModel([todo]); // initialiser le model avec cette todo
+			subject.setView(''); // initialiser la vue
+
+			// l'action de suppression d'une todo doit déclencher une suppression de la todo dans le model
+			view.trigger('itemRemove', { id: 1 });
+			expect(model.remove).toHaveBeenCalledWith(1, jasmine.any(Function));
 		});
 
 		it('should remove an entry from the view', function() {
