@@ -2,6 +2,8 @@
 # Created by https://www.gitignore.io/api/node,sass
 # Edit at https://www.gitignore.io/?templates=node,sass
 
+*.docx
+
 ### Node ###
 # Logs
 logs
