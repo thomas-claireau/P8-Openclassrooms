@@ -1,6 +1,6 @@
 {
 	"name": "P8-Openclassrooms",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"scripts": {
 		"serve": "webpack-dev-server -d --config webpack.config.serve.js --mode=development"
 	},
