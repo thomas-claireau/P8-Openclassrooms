@@ -25,7 +25,7 @@ img {
 
 a,
 a:active {
-	color: #606;
+	color: #4e4e4e;
 	text-decoration: none;
 }
 
@@ -161,6 +161,26 @@ samp {
 	width: calc(100% - 240px);
 }
 
+#main.home {
+	text-align: center;
+}
+
+#main.home h1 {
+	font-size: 37px;
+	font-weight: 500;
+}
+
+video {
+	margin-top: 50px;
+	width: 550px;
+}
+
+@media screen and (max-width: 900px) {
+	video {
+		width: 100%;
+	}
+}
+
 header {
 	display: block;
 }
@@ -239,7 +259,7 @@ nav ul a:active {
 
 nav a:hover,
 nav a:active {
-	color: #606;
+	color: #4e4e4e;
 }
 
 nav > ul {
@@ -247,7 +267,7 @@ nav > ul {
 }
 
 nav > ul > li > a {
-	color: #606;
+	color: #4e4e4e;
 	margin-top: 10px;
 }
 
@@ -269,7 +289,7 @@ nav h2 {
 
 nav > h2 > a {
 	margin: 10px 0 -10px;
-	color: #606 !important;
+	color: #4e4e4e !important;
 }
 
 footer {
@@ -492,7 +512,7 @@ thead tr {
 span.param-type,
 .params td .param-type,
 .param-type dd {
-	color: #606;
+	color: #4e4e4e;
 	font-family: Consolas, Monaco, 'Andale Mono', monospace;
 }
 
