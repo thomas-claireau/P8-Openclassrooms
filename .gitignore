@@ -3,6 +3,7 @@
 # Edit at https://www.gitignore.io/?templates=node,sass
 
 *.docx
+*.xlsx
 
 ### Node ###
 # Logs
