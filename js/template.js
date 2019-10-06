@@ -1,5 +1,5 @@
 /*jshint laxbreak:true */
-(function (window) {
+(function(window) {
 	'use strict';
 
 	var htmlEscapes = {
@@ -7,19 +7,19 @@
 		'<': '&lt;',
 		'>': '&gt;',
 		'"': '&quot;',
-		'\'': '&#x27;',
-		'`': '&#x60;'
+		"'": '&#x27;',
+		'`': '&#x60;',
 	};
 
-	var escapeHtmlChar = function (chr) {
+	var escapeHtmlChar = function(chr) {
 		return htmlEscapes[chr];
 	};
 
 	var reUnescapedHtml = /[&<>"'`]/g;
 	var reHasUnescapedHtml = new RegExp(reUnescapedHtml.source);
 
-	var escape = function (string) {
-		return (string && reHasUnescapedHtml.test(string))
+	var escape = function(string) {
+		return string && reHasUnescapedHtml.test(string)
 			? string.replace(reUnescapedHtml, escapeHtmlChar)
 			: string;
 	};
@@ -30,14 +30,14 @@
 	 * @constructor
 	 */
 	function Template() {
-		this.defaultTemplate
-		=	'<li data-id="{{id}}" class="{{completed}}">'
-		+		'<div class="view">'
-		+			'<input class="toggle" type="checkbox" {{checked}}>'
-		+			'<label>{{title}}</label>'
-		+			'<button class="destroy"></button>'
-		+		'</div>'
-		+	'</li>';
+		this.defaultTemplate =
+			'<li data-id="{{id}}" class="{{completed}}">' +
+			'<div class="view">' +
+			'<input class="toggle" type="checkbox" {{checked}}>' +
+			'<label>{{title}}</label>' +
+			'<button class="destroy"></button>' +
+			'</div>' +
+			'</li>';
 	}
 
 	/**
@@ -57,7 +57,7 @@
 	 *	completed: 0,
 	 * });
 	 */
-	Template.prototype.show = function (data) {
+	Template.prototype.show = function(data) {
 		var i, l;
 		var view = '';
 
@@ -88,7 +88,7 @@
 	 * @param {number} activeTodos The number of active todos.
 	 * @returns {string} String containing the count
 	 */
-	Template.prototype.itemCounter = function (activeTodos) {
+	Template.prototype.itemCounter = function(activeTodos) {
 		var plural = activeTodos === 1 ? '' : 's';
 
 		return '<strong>' + activeTodos + '</strong> item' + plural + ' left';
@@ -97,10 +97,10 @@
 	/**
 	 * Updates the text within the "Clear completed" button
 	 *
-	 * @param  {[type]} completedTodos The number of completed todos.
+	 * @param  {number} completedTodos The number of completed todos.
 	 * @returns {string} String containing the count
 	 */
-	Template.prototype.clearCompletedButton = function (completedTodos) {
+	Template.prototype.clearCompletedButton = function(completedTodos) {
 		if (completedTodos > 0) {
 			return 'Clear completed';
 		} else {
