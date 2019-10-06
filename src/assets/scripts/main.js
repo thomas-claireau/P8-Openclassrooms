@@ -1,4 +1,13 @@
 /*global app, $on */
+
+import './controller';
+import './helpers';
+import './model';
+import './store';
+import './template';
+import './view';
+import './base';
+
 (function() {
 	'use strict';
 
