@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"scripts": {
 		"serve": "webpack-dev-server -d --config webpack.config.serve.js --mode=development",
-		"generate-docs": "node_modules/.bin/jsdoc --configure .jsdoc.json --verbose"
+		"generate-docs": "node_modules/.bin/jsdoc -c jsdoc.json"
 	},
 	"repository": {
 		"type": "git",
@@ -21,6 +21,7 @@
 		"todomvc-app-css": "^2.0.1"
 	},
 	"devDependencies": {
+		"docdash": "^1.1.1",
 		"jasmine-core": "^2.0.0",
 		"jsdoc": "^3.6.3",
 		"jsdoc-to-markdown": "^5.0.1",
