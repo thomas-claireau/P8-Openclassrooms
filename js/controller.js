@@ -2,11 +2,11 @@
 	'use strict';
 
 	/**
-	 * Takes a model and view and acts as the controller between them
+	 * Permet l'intéraction entre le {@link Model} et la {@link View}
 	 *
 	 * @constructor
-	 * @param {object} model The model instance
-	 * @param {object} view The view instance
+	 * @param {object} model L'instance du {@link Model}
+	 * @param {object} view L'instance de la {@link View}
 	 */
 	class Controller {
 		constructor(model, view) {
@@ -39,18 +39,18 @@
 			});
 		}
 		/**
-		 * Loads and initialises the view
+		 * Charge et initialise la {@link View}
 		 *
-		 * @param {string} '' | 'active' | 'completed'
+		 * @param {string} locationHash Peut prendre 3 valeurs : '' / 'active' / 'completed'
 		 */
 		setView(locationHash) {
 			var route = locationHash.split('/')[1];
 			var page = route || '';
 			this._updateFilterState(page);
 		}
+
 		/**
-		 * An event to fire on load. Will get all items and display them in the
-		 * todo-list
+		 * Affiche toutes les tâches de la liste en cours
 		 */
 		showAll() {
 			var self = this;
@@ -58,8 +58,9 @@
 				self.view.render('showEntries', data);
 			});
 		}
+
 		/**
-		 * Renders all active tasks
+		 * Affiche toutes les tâches actives de la liste en cours
 		 */
 		showActive() {
 			var self = this;
@@ -67,8 +68,9 @@
 				self.view.render('showEntries', data);
 			});
 		}
+
 		/**
-		 * Renders all completed tasks
+		 * Affiche toutes les tâches complétées de la liste en cours
 		 */
 		showCompleted() {
 			var self = this;
@@ -76,9 +78,10 @@
 				self.view.render('showEntries', data);
 			});
 		}
+
 		/**
-		 * An event to fire whenever you want to add an item. Simply pass in the event
-		 * object and it'll handle the DOM insertion and saving of the new item.
+		 * Ajoute une nouvelle tâche dans la liste en cours (insertion dans le DOM et dans le local storage)
+		 * @param {string} title Le titre de la tâche ajoutée
 		 */
 		addItem(title) {
 			var self = this;
@@ -97,8 +100,10 @@
 			// 	self._filter(true);
 			// });
 		}
-		/*
-		 * Triggers the item editing mode.
+
+		/**
+		 * Active l'édition d'une tâche de la liste en cours
+		 * @param {string} id L'id du model (correspondant à la tâche à éditer)
 		 */
 		editItem(id) {
 			var self = this;
@@ -106,6 +111,7 @@
 				self.view.render('editItem', { id: id, title: data[0].title });
 			});
 		}
+
 		/*
 		 * Finishes the item editing mode successfully.
 		 */
