@@ -3,9 +3,9 @@
 	'use strict';
 
 	/**
-	 * Sets up a brand new Todo list.
+	 * Initialise une nouvelle liste de tâche.
 	 * @constructor
-	 * @param {string} name The name of your new to do list.
+	 * @param {string} name Le nom de la nouvelle liste de tâche.
 	 */
 	class Todo {
 		constructor(name) {

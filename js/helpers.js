@@ -1,23 +1,55 @@
 /*global NodeList */
-(function (window) {
+(function(window) {
 	'use strict';
 
-	// Get element(s) by CSS selector:
-	window.qs = function (selector, scope) {
+	/**
+	 * Récupère un élément avec querySelector (qs) et le sélecteur CSS
+	 * @module Helpers
+	 * @function qs
+	 * @param {string} selector - Le sélecteur css de l'élément
+	 * @param {string} scope - Le scope de l'élément (si pas renseigné, document par défaut)
+	 */
+	window.qs = function(selector, scope) {
 		return (scope || document).querySelector(selector);
 	};
-	window.qsa = function (selector, scope) {
+
+	/**
+	 * Récupère plusieurs éléments avec querySelectorAll (qsa) et le sélecteur CSS
+	 * @module Helpers
+	 * @function qsa
+	 * @param {string} selector - Le sélecteur css des éléments
+	 * @param {string} scope - Le scope des éléments (si pas renseigné, document par défaut)
+	 */
+	window.qsa = function(selector, scope) {
 		return (scope || document).querySelectorAll(selector);
 	};
 
-	// addEventListener wrapper:
-	window.$on = function (target, type, callback, useCapture) {
+	// Fonction pour ajouter un écouteur d'évènement:
+	/**
+	 * Ajoute un écouteur d'évènement à l'élément ciblé
+	 * @module Helpers
+	 * @function $on
+	 * @param {element} target - L'élément ciblé
+	 * @param {string} type - Le type de l'évènement (click, change...)
+	 * @param {string} callback - La réponse en cas d'évènement
+	 * @param {boolean} useCapture
+	 */
+	window.$on = function(target, type, callback, useCapture) {
+		console.log(target);
+		console.log(type);
+		console.log(callback);
+		console.log(useCapture);
 		target.addEventListener(type, callback, !!useCapture);
 	};
 
-	// Attach a handler to event for all elements that match the selector,
-	// now or in the future, based on a root element
-	window.$delegate = function (target, selector, type, handler) {
+	// Ajoute un écouteur d'évènement à tous les éléments qui correspondent au sélecteur passé dans la fonction.
+	/**
+	 * Description
+	 * @module Helpers
+	 * @function name
+	 * @param {} param - explication
+	 */
+	window.$delegate = function(target, selector, type, handler) {
 		function dispatchEvent(event) {
 			var targetElement = event.target;
 			var potentialElements = window.qsa(selector, target);
@@ -34,9 +66,14 @@
 		window.$on(target, type, dispatchEvent, useCapture);
 	};
 
-	// Find the element's parent with the given tag name:
-	// $parent(qs('a'), 'div');
-	window.$parent = function (element, tagName) {
+	// Trouve l'élément parent qui porte le tag suivant : $parent(qs('a'), 'div');
+	/**
+	 * Description
+	 * @module Helpers
+	 * @function name
+	 * @param {} param - explication
+	 */
+	window.$parent = function(element, tagName) {
 		if (!element.parentNode) {
 			return;
 		}
@@ -46,7 +83,7 @@
 		return window.$parent(element.parentNode, tagName);
 	};
 
-	// Allow for looping on nodes by chaining:
+	// Autorise les boucles sur les noeuds:
 	// qsa('.foo').forEach(function () {})
 	NodeList.prototype.forEach = Array.prototype.forEach;
 })(window);
