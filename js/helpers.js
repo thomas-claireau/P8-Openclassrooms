@@ -24,7 +24,6 @@
 		return (scope || document).querySelectorAll(selector);
 	};
 
-	// Fonction pour ajouter un écouteur d'évènement:
 	/**
 	 * Ajoute un écouteur d'évènement à l'élément ciblé
 	 * @module Helpers
@@ -32,22 +31,20 @@
 	 * @param {element} target - L'élément ciblé
 	 * @param {string} type - Le type de l'évènement (click, change...)
 	 * @param {string} callback - La réponse en cas d'évènement
-	 * @param {boolean} useCapture
+	 * @param {boolean} useCapture - indique si l'évènement est envoyé au listener enregistré avant d'être distribué à tout EventTarget (https://developer.mozilla.org/fr/docs/Web/API/EventTarget/addEventListener)
 	 */
 	window.$on = function(target, type, callback, useCapture) {
-		console.log(target);
-		console.log(type);
-		console.log(callback);
-		console.log(useCapture);
 		target.addEventListener(type, callback, !!useCapture);
 	};
 
-	// Ajoute un écouteur d'évènement à tous les éléments qui correspondent au sélecteur passé dans la fonction.
 	/**
-	 * Description
+	 * Ajoute un écouteur d'évènement à tous les éléments qui correspondent au sélecteur passé dans la fonction.
 	 * @module Helpers
-	 * @function name
-	 * @param {} param - explication
+	 * @function $delegate
+	 * @param {element} target - L'élément ciblé
+	 * @param {string} selector - Le sélecteur css de l'élément ciblé
+	 * @param {string} type - Le type de l'event
+	 * @param {string} handler - Callback exécuté
 	 */
 	window.$delegate = function(target, selector, type, handler) {
 		function dispatchEvent(event) {
@@ -66,12 +63,12 @@
 		window.$on(target, type, dispatchEvent, useCapture);
 	};
 
-	// Trouve l'élément parent qui porte le tag suivant : $parent(qs('a'), 'div');
 	/**
-	 * Description
+	 * Trouve l'élément parent qui porte le tag suivant : $parent(qs('a'), 'div');
 	 * @module Helpers
-	 * @function name
-	 * @param {} param - explication
+	 * @function $parent
+	 * @param {element} element - L'élément ciblé
+	 * @param {string} tagName - Le tag de l'élément ciblé
 	 */
 	window.$parent = function(element, tagName) {
 		if (!element.parentNode) {
