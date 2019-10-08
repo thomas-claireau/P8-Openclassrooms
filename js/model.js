@@ -2,20 +2,21 @@
 	'use strict';
 
 	/**
-	 * Creates a new Model instance and hooks up the storage.
+	 * Création d'une nouvelle instance de Model et intéraction avec la classe {@link Store}
 	 *
 	 * @constructor
-	 * @param {object} storage A reference to the client side storage class
+	 * @param {object} storage Identifie la classe {@link Store} côté client.
 	 */
 	class Model {
 		constructor(storage) {
 			this.storage = storage;
 		}
+
 		/**
-		 * Creates a new todo model
+		 * Créer un nouveau model pour la tâche ajoutée
 		 *
-		 * @param {string} [title] The title of the task
-		 * @param {function} [callback] The callback to fire after the model is created
+		 * @param {string} title Le titre la tâche
+		 * @param {function} callback La fonction appelé après que le model soit crée.
 		 */
 		create(title, callback) {
 			title = title || '';
@@ -26,19 +27,21 @@
 			};
 			this.storage.save(newItem, callback);
 		}
+
 		/**
-		 * Finds and returns a model in storage. If no query is given it'll simply
-		 * return everything. If you pass in a string or number it'll look that up as
-		 * the ID of the model to find. Lastly, you can pass it an object to match
-		 * against.
+		 * Recherche et retourne un modèle stocké. Si aucune requête n'est donnée, tout sera simplement retourné. Si vous transmettez une chaîne ou un nombre, il le recherchera en tant qu'ID du modèle à rechercher. Enfin, vous pouvez lui transmettre un objet à comparer.
+		 * Recherche et retourne dans le localStorage un model stocké.
+		 * Si aucune requête n'est envoyée, tous les models seront renvoyés.
+		 * Si la requête est une chaine de caractère ou un nombre, la méthode recherchera un id de model à retourner
+		 * Il est aussi possible de passer un objet à comparer dans la requête.
 		 *
-		 * @param {string|number|object} [query] A query to match models against
-		 * @param {function} [callback] The callback to fire after the model is found
+		 * @param {string|number|object} query La requête pour filtrer les modèles
+		 * @param {function} callback Une fonction de rappel à utiliser lorsqu'un model est trouvé
 		 *
 		 * @example
-		 * model.read(1, func); // Will find the model with an ID of 1
-		 * model.read('1'); // Same as above
-		 * //Below will find a model with foo equalling bar and hello equalling world.
+		 * model.read(1, func); // Va chercher et trouver le modèle avec l'id 1
+		 * model.read('1'); // Fera la même chose
+		 * // Ci-dessous, un exemple avec foo égal à bar et hello égal à world
 		 * model.read({ foo: 'bar', hello: 'world' });
 		 */
 		read(query, callback) {
@@ -55,36 +58,39 @@
 				this.storage.find(query, callback);
 			}
 		}
+
 		/**
-		 * Updates a model by giving it an ID, data to update, and a callback to fire when
-		 * the update is complete.
+		 * Met à jour un modèle en lui attribuant un ID, des données à mettre à jour et une fonction de rappel appelée une fois la mise à jour terminée.
 		 *
-		 * @param {number} id The id of the model to update
-		 * @param {object} data The properties to update and their new value
-		 * @param {function} callback The callback to fire when the update is complete.
+		 * @param {number} id L'id du model à mettre à jour
+		 * @param {object} data Les données à mettre à jour et leurs nouvelles valeurs
+		 * @param {function} callback La fonction de rappel utilisée après la mise à jour
 		 */
 		update(id, data, callback) {
 			this.storage.save(data, callback, id);
 		}
+
 		/**
-		 * Removes a model from storage
+		 * Supprime un élément du stockage
 		 *
-		 * @param {number} id The ID of the model to remove
-		 * @param {function} callback The callback to fire when the removal is complete.
+		 * @param {number} id L'id du model à supprimer
+		 * @param {function} callback La fonction de rappel utilisée après la suppression
 		 */
 		remove(id, callback) {
 			this.storage.remove(id, callback);
 		}
+
 		/**
-		 * WARNING: Will remove ALL data from storage.
+		 * Attention, cette méthode supprime tous les éléments du stockage
 		 *
-		 * @param {function} callback The callback to fire when the storage is wiped.
+		 * @param {function} callback La fonction de rappel utilisée après la suppression
 		 */
 		removeAll(callback) {
 			this.storage.drop(callback);
 		}
+
 		/**
-		 * Returns a count of all todos
+		 * Retourne le nombre de todos
 		 */
 		getCount(callback) {
 			var todos = {
@@ -106,7 +112,7 @@
 		}
 	}
 
-	// Export to window
+	// Exporte vers l'objet Window (affichage)
 	window.app = window.app || {};
 	window.app.Model = Model;
 })(window);
