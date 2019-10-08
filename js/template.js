@@ -25,7 +25,7 @@
 	};
 
 	/**
-	 * Sets up defaults for all the Template methods such as a default template
+	 * Définit le template utilisé pour afficher les tâches
 	 *
 	 * @constructor
 	 */
@@ -40,21 +40,22 @@
 				'</div>' +
 				'</li>';
 		}
+
 		/**
-		 * Creates an <li> HTML string and returns it for placement in your app.
+		 * Crée un élément HTML <li> et place le template dans l'application.
 		 *
-		 * NOTE: In real life you should be using a templating engine such as Mustache
-		 * or Handlebars, however, this is a vanilla JS example.
+		 * Normalement, il est conseillé d'utiliser un moteur de template comme Mustache ou Handlebars.
 		 *
-		 * @param {object} data The object containing keys you want to find in the
-		 *                      template to replace.
-		 * @returns {string} HTML String of an <li> element
+		 * Pour simplifier notre application, nous avons décidé de créer un template en vanilla JS.
+		 *
+		 * @param {object} data L'objet contenant les informations à remplacer dans le template.
+		 * @returns {string} Le template HTML contenant l'élément <li>
 		 *
 		 * @example
 		 * view.show({
-		 *	id: 1,
-		 *	title: "Hello World",
-		 *	completed: 0,
+		 *	id: 1, // l'id de la tâche
+		 *	title: "Hello World", // le titre de la tâche
+		 *	completed: 0, // la tâche est par défaut non terminée
 		 * });
 		 */
 		show(data) {
@@ -76,21 +77,24 @@
 			}
 			return view;
 		}
+
 		/**
-		 * Displays a counter of how many to dos are left to complete
+		 * Affiche un compteur de tâches actives en bas à gauche de l'application
 		 *
-		 * @param {number} activeTodos The number of active todos.
-		 * @returns {string} String containing the count
+		 * @param {number} activeTodos Le nombre de tâches actives
+		 * @returns {string} La chaine de caractère contenant le nombre
 		 */
 		itemCounter(activeTodos) {
 			var plural = activeTodos === 1 ? '' : 's';
 			return '<strong>' + activeTodos + '</strong> item' + plural + ' left';
 		}
+
 		/**
 		 * Updates the text within the "Clear completed" button
+		 * Affiche ou non le bouton "Clear Completed" (si pas de tâches terminées = pas de bouton)
 		 *
-		 * @param  {number} completedTodos The number of completed todos.
-		 * @returns {string} String containing the count
+		 * @param  {number} completedTodos Le nombre de tâche complétées
+		 * @returns {string} La chaine de caractère contenant le texte du bouton.
 		 */
 		clearCompletedButton(completedTodos) {
 			if (completedTodos > 0) {
@@ -101,7 +105,7 @@
 		}
 	}
 
-	// Export to window
+	// Exporte vers l'objet Window (affichage)
 	window.app = window.app || {};
 	window.app.Template = Template;
 })(window);
