@@ -103,7 +103,7 @@
 
 		/**
 		 * Active l'édition d'une tâche de la liste en cours
-		 * @param {string} id L'id du model (correspondant à la tâche à éditer)
+		 * @param {number} id L'id du model (correspondant à la tâche à éditer)
 		 */
 		editItem(id) {
 			var self = this;
@@ -112,8 +112,10 @@
 			});
 		}
 
-		/*
-		 * Finishes the item editing mode successfully.
+		/**
+		 * Enregistre la nouvelle tâche éditée
+		 * @param {number} id L'id de la tâche éditée
+		 * @param {string} title Le titre de la tâche éditée
 		 */
 		editItemSave(id, title) {
 			var self = this;
@@ -133,8 +135,10 @@
 				self.removeItem(id);
 			}
 		}
-		/*
-		 * Cancels the item editing mode.
+
+		/**
+		 * Annule l'édition de la tâche en cours
+		 * @param id L'id de la tâche éditée
 		 */
 		editItemCancel(id) {
 			var self = this;
@@ -142,12 +146,11 @@
 				self.view.render('editItemDone', { id: id, title: data[0].title });
 			});
 		}
+
 		/**
-		 * By giving it an ID it'll find the DOM element matching that ID,
-		 * remove it from the DOM and also remove it from storage.
+		 * Supprime une tâche de la liste en cours.
 		 *
-		 * @param {number} id The ID of the item to remove from the DOM and
-		 * storage
+		 * @param {number} id L'id de la tâche à supprimer dans le DOM et dans le localStorage
 		 */
 		removeItem(id) {
 			var self = this;
@@ -170,8 +173,9 @@
 			});
 			self._filter();
 		}
+
 		/**
-		 * Will remove all completed items from the DOM and storage.
+		 * Supprime toutes les tâches terminées de la liste en cours
 		 */
 		removeCompletedItems() {
 			var self = this;
@@ -182,14 +186,13 @@
 			});
 			self._filter();
 		}
+
 		/**
-		 * Give it an ID of a model and a checkbox and it will update the item
-		 * in storage based on the checkbox's state.
+		 * Actualise l'affichage de la tâche en fonction de son statut (terminé ou non)
 		 *
-		 * @param {number} id The ID of the element to complete or uncomplete
-		 * @param {object} checkbox The checkbox to check the state of complete
-		 *                          or not
-		 * @param {boolean|undefined} silent Prevent re-filtering the todo items
+		 * @param {number} id L'id de la tâche (toutes les tâches sont parcourues)
+		 * @param {boolean} checkbox Vérifie si le champ checked est coché ou non
+		 * @param {boolean|undefined} silent Empêche le refiltrage des éléments de la liste
 		 */
 		toggleComplete(id, completed, silent) {
 			var self = this;
@@ -203,11 +206,13 @@
 				self._filter();
 			}
 		}
+
 		/**
-		 * Will toggle ALL checkboxes' on/off state and completeness of models.
-		 * Just pass in the event object.
+		 * Permet d'activer ou de désactiver les cases cochées
+		 * @param {object} completed Les tâches terminées
 		 */
 		toggleAll(completed) {
+			console.log(completed);
 			var self = this;
 			self.model.read({ completed: !completed }, function(data) {
 				data.forEach(function(item) {
@@ -216,9 +221,9 @@
 			});
 			self._filter();
 		}
+
 		/**
-		 * Updates the pieces of the page which change depending on the remaining
-		 * number of todos.
+		 * Met à jour le compteur de tâche en bas à gauche de l'application
 		 */
 		_updateCount() {
 			var self = this;
@@ -232,29 +237,32 @@
 				self.view.render('contentBlockVisibility', { visible: todos.total > 0 });
 			});
 		}
+
 		/**
-		 * Re-filters the todo items, based on the active route.
-		 * @param {boolean|undefined} force  forces a re-painting of todo items.
+		 * Refiltre les tâches en fonction de leur statut actif (#active)
+		 * @param {boolean|undefined} force  Refiltre les tâches.
 		 */
 		_filter(force) {
 			var activeRoute =
 				this._activeRoute.charAt(0).toUpperCase() + this._activeRoute.substr(1);
+
 			// Update the elements on the page, which change with each completed todo
+			// Actualise le nombre d'élément sur la page à chaque fois qu'une tâche est terminée
 			this._updateCount();
-			// If the last active route isn't "All", or we're switching routes, we
-			// re-create the todo item elements, calling:
+
+			// Si le filtre n'est pas "All" ou si nous avons changé le filtre, nous devons re-créer les tâches en appelant:
 			//   this.show[All|Active|Completed]();
 			if (force || this._lastActiveRoute !== 'All' || this._lastActiveRoute !== activeRoute) {
 				this['show' + activeRoute]();
 			}
 			this._lastActiveRoute = activeRoute;
 		}
+
 		/**
-		 * Simply updates the filter nav's selected states
+		 * Met à jour l'url pour filtrer les tâches (ajoute à l'url : /active ou /completed)
 		 */
 		_updateFilterState(currentPage) {
-			// Store a reference to the active route, allowing us to re-filter todo
-			// items as they are marked complete or incomplete.
+			// Stocke une référence à la route active, nous permettant de filtrer à nouveau les tâches à faire lorsqu'elles sont marquées comme terminée ou non terminée.
 			this._activeRoute = currentPage;
 			if (currentPage === '') {
 				this._activeRoute = 'All';
@@ -264,7 +272,7 @@
 		}
 	}
 
-	// Export to window
+	// Exporte vers l'objet Window (affichage)
 	window.app = window.app || {};
 	window.app.Controller = Controller;
 })(window);
