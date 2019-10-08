@@ -4,13 +4,9 @@
 	'use strict';
 
 	/**
-	 * View that abstracts away the browser's DOM completely.
-	 * It has two simple entry points:
-	 *
-	 *   - bind(eventName, handler)
-	 *     Takes a todo application event and registers the handler
-	 *   - render(command, parameterObject)
-	 *     Renders the given command with the options
+	 * Définit les valeurs par défaut du template ainsi que les intéractions avec le DOM (touches du clavier et évènements)
+	 * @constructor
+	 * @param {string} template Le template utilisé
 	 */
 	class View {
 		constructor(template) {
@@ -47,7 +43,7 @@
 			// }
 			if (listItem) {
 				listItem.className = completed ? 'completed' : '';
-				// In case it was toggled from an event and not by clicking the checkbox
+				// On définit la tâche comme terminée par défaut
 				qs('input', listItem).checked = completed;
 			}
 		}
@@ -138,8 +134,7 @@
 			});
 			$delegate(self.$todoList, 'li .edit', 'keypress', function(event) {
 				if (event.keyCode === self.ENTER_KEY) {
-					// Remove the cursor from the input when you hit enter just like if it
-					// were a real form
+					// Permet de quitter le mode édition lorsqu'on appuie sur Entrée
 					this.blur();
 				}
 			});
@@ -233,7 +228,7 @@
 		}
 	}
 
-	// Export to window
+	// Exporte vers l'objet Window (affichage)
 	window.app = window.app || {};
 	window.app.View = View;
 })(window);
