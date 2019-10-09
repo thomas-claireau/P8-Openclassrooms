@@ -21,20 +21,42 @@
 			this.$toggleAll = qs('.toggle-all');
 			this.$newTodo = qs('.new-todo');
 		}
+
+		/**
+		 * Supprime une tâche de la liste
+		 * @param {number} id L'id de la tâche à supprimer
+		 */
 		_removeItem(id) {
 			var elem = qs('[data-id="' + id + '"]');
 			if (elem) {
 				this.$todoList.removeChild(elem);
 			}
 		}
+
+		/**
+		 * Affiche ou cache les éléments terminés
+		 * @param {number} completedCount Le nombre d'éléments terminés
+		 * @param {boolean} visible Les éléments sont-ils visibles ou non ?
+		 */
 		_clearCompletedButton(completedCount, visible) {
 			this.$clearCompleted.innerHTML = this.template.clearCompletedButton(completedCount);
 			this.$clearCompleted.style.display = visible ? 'block' : 'none';
 		}
+
+		/**
+		 * Met en place un filtre dans l'url pour filtrer les tâches de la liste
+		 * @param {string} currentPage Le filtre appliqué : '' / active / completed
+		 */
 		_setFilter(currentPage) {
 			qs('.filters .selected').className = '';
 			qs('.filters [href="#/' + currentPage + '"]').className = 'selected';
 		}
+
+		/**
+		 * Test si une tâche est terminée ou non
+		 * @param {number} id L'id de la tâche à tester
+		 * @param {boolean} completed La tâche est-elle terminée ou non ?
+		 */
 		_elementComplete(id, completed) {
 			var listItem = qs('[data-id="' + id + '"]');
 			// amélioration
@@ -47,6 +69,12 @@
 				qs('input', listItem).checked = completed;
 			}
 		}
+
+		/**
+		 * Editer une tâche dans la liste (grâce au double click)
+		 * @param {number} id L'id de la tâche à éditer
+		 * @param {string} title Le nouveau titre de la tâche
+		 */
 		_editItem(id, title) {
 			var listItem = qs('[data-id="' + id + '"]');
 			// amélioration
@@ -62,6 +90,12 @@
 				input.value = title;
 			}
 		}
+
+		/**
+		 * Indique que l'édition d'une tâche est terminée
+		 * @param {number} id L'id de la tâche qui était en édition
+		 * @param {string} title Le nouveau titre de la tâche
+		 */
 		_editItemDone(id, title) {
 			var listItem = qs('[data-id="' + id + '"]');
 			// amélioration
@@ -77,6 +111,12 @@
 				});
 			}
 		}
+
+		/**
+		 * Retourne les tâches dans le DOM, côté HTML
+		 * @param {string} viewCmd La fonction active
+		 * @param {object} parameter Les paramètres actifs
+		 */
 		render(viewCmd, parameter) {
 			var self = this;
 			var viewCommands = {
@@ -118,10 +158,21 @@
 			};
 			viewCommands[viewCmd]();
 		}
+
+		/**
+		 * Récupère l'id de la tâche grâce à son attribut data en HTML
+		 * @param {element} element La tâche dont on cherche l'id
+		 * @returns {number} L'id de la tâche
+		 */
 		_itemId(element) {
 			var li = $parent(element, 'li');
 			return parseInt(li.dataset.id, 10);
 		}
+
+		/**
+		 * Définit les actions après l'édition d'une tâche
+		 * @param {function} handler Fonction de rappel qui est exécuté après l'édition d'une tâche
+		 */
 		_bindItemEditDone(handler) {
 			var self = this;
 			$delegate(self.$todoList, 'li .edit', 'blur', function() {
@@ -139,6 +190,11 @@
 				}
 			});
 		}
+
+		/**
+		 * Définit les actions lorsque l'édition d'une tâche est annulée
+		 * @param {function} handler Fonction de rappel qui est exécutée lors de l'annulation de l'édition d'une tâche
+		 */
 		_bindItemEditCancel(handler) {
 			var self = this;
 			$delegate(self.$todoList, 'li .edit', 'keyup', function(event) {
@@ -149,6 +205,12 @@
 				}
 			});
 		}
+
+		/**
+		 * Greffe des écouteurs d'évènements sur les tâches en fonction des actions de l'utilisateur, côté HTML
+		 * @param {string} event L'event choisi
+		 * @param {function} handler Fonction de rappel exécutée selon la situation
+		 */
 		bind(event, handler) {
 			var self = this;
 			// amélioration

@@ -90,7 +90,6 @@
 		}
 
 		/**
-		 * Updates the text within the "Clear completed" button
 		 * Affiche ou non le bouton "Clear Completed" (si pas de tâches terminées = pas de bouton)
 		 *
 		 * @param  {number} completedTodos Le nombre de tâche complétées
