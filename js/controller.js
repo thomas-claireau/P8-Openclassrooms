@@ -92,13 +92,6 @@
 					self._filter(true);
 				});
 			}
-			// if (title.trim() === '') {
-			// 	return;
-			// }
-			// self.model.create(title, function() {
-			// 	self.view.render('clearNewTodo');
-			// 	self._filter(true);
-			// });
 		}
 
 		/**
@@ -119,13 +112,15 @@
 		 */
 		editItemSave(id, title) {
 			var self = this;
-			// amélioration
-			// while (title[0] === ' ') {
-			// 	title = title.slice(1);
-			// }
-			// while (title[title.length - 1] === ' ') {
-			// 	title = title.slice(0, -1);
-			// }
+
+			while (title[0] === ' ') {
+				title = title.slice(1);
+			}
+
+			while (title[title.length - 1] === ' ') {
+				title = title.slice(0, -1);
+			}
+
 			if (title.length !== 0) {
 				title = title.trim();
 				self.model.update(id, { title: title }, function() {
@@ -158,15 +153,8 @@
 			self.model.read(function(data) {
 				items = data;
 			});
+
 			// amélioration
-			// items.forEach(function(item) {
-			// 	if (item.id === id) {
-			// 		console.log('Element with ID: ' + id + ' has been removed.');
-			// 	}
-			// });
-			// self.model.remove(id, function() {
-			// 	self.view.render('removeItem', id);
-			// });
 			self.model.remove(id, function() {
 				self.view.render('removeItem', id);
 				console.log('Element with ID: ' + id + ' has been removed.');

@@ -60,9 +60,6 @@
 		_elementComplete(id, completed) {
 			var listItem = qs('[data-id="' + id + '"]');
 			// amélioration
-			// if (!listItem) {
-			// 	return;
-			// }
 			if (listItem) {
 				listItem.className = completed ? 'completed' : '';
 				// On définit la tâche comme terminée par défaut
@@ -78,9 +75,6 @@
 		_editItem(id, title) {
 			var listItem = qs('[data-id="' + id + '"]');
 			// amélioration
-			// if (!listItem) {
-			// 	return;
-			// }
 			if (listItem) {
 				listItem.className = listItem.className + ' editing';
 				var input = document.createElement('input');
@@ -99,9 +93,6 @@
 		_editItemDone(id, title) {
 			var listItem = qs('[data-id="' + id + '"]');
 			// amélioration
-			// if (!listItem) {
-			// 	return;
-			// }
 			if (listItem) {
 				var input = qs('input.edit', listItem);
 				listItem.removeChild(input);
@@ -255,38 +246,6 @@
 					self._bindItemEditCancel(handler);
 					break;
 			}
-			// if (event === 'newTodo') {
-			// 	$on(self.$newTodo, 'change', function() {
-			// 		handler(self.$newTodo.value);
-			// 	});
-			// } else if (event === 'removeCompleted') {
-			// 	$on(self.$clearCompleted, 'click', function() {
-			// 		handler();
-			// 	});
-			// } else if (event === 'toggleAll') {
-			// 	$on(self.$toggleAll, 'click', function() {
-			// 		handler({ completed: this.checked });
-			// 	});
-			// } else if (event === 'itemEdit') {
-			// 	$delegate(self.$todoList, 'li label', 'dblclick', function() {
-			// 		handler({ id: self._itemId(this) });
-			// 	});
-			// } else if (event === 'itemRemove') {
-			// 	$delegate(self.$todoList, '.destroy', 'click', function() {
-			// 		handler({ id: self._itemId(this) });
-			// 	});
-			// } else if (event === 'itemToggle') {
-			// 	$delegate(self.$todoList, '.toggle', 'click', function() {
-			// 		handler({
-			// 			id: self._itemId(this),
-			// 			completed: this.checked,
-			// 		});
-			// 	});
-			// } else if (event === 'itemEditDone') {
-			// 	self._bindItemEditDone(handler);
-			// } else if (event === 'itemEditCancel') {
-			// 	self._bindItemEditCancel(handler);
-			// }
 		}
 	}
 

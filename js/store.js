@@ -35,9 +35,6 @@
 		 */
 		find(query, callback) {
 			// amélioration
-			// if (!callback) {
-			// 	return;
-			// }
 			if (callback) {
 				var todos = JSON.parse(localStorage[this._dbName]).todos;
 				callback.call(
