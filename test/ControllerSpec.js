@@ -188,12 +188,12 @@ describe('controller', function() {
 			setUpModel(todos);
 			subject.setView('');
 
-			// demander à la vue de déclencher le bouton pour passer le paramètre completed de chaque todo à true
+			// demander à la vue de filtrer les tâches en fonction paramètre completed (à true)
 			view.trigger('toggleAll', { completed: true });
 		});
 		it('should toggle all todos to completed', function() {
 			// TODO: write test
-			// actualiser le model en passant le paramètre completed des todos à true
+			// actualiser le model en passant le paramètre completed à true pour filtrer les tâches
 			for (let id = 1; id <= 3; id++) {
 				expect(model.update).toHaveBeenCalledWith(
 					id,
