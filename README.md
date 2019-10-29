@@ -51,4 +51,41 @@ Pour le dire plus simplement, il faut documenter les éléments suivants :
 
 Vous pouvez utiliser le format que vous souhaitez (ex. un wiki sur Github, un document en format texte, etc).
 
-### ⌛ Projet en cours...
+### ✔️ Projet validé
+
+Commentaires de l'évaluateur :
+
+1. Provide an assessment of the student's work and, if the project has to be reworked, write a few lines about the criteria the project does not currently meet:
+
+Thomas a réalisé un très bon audit, ainsi qu'un bon travail d'optimisation du projet et la correction des bugs s'est très bien déroulée.
+
+2. Assessment of the project deliverables against the project criteria:
+
+Les tests unitaires manquants ont étés ajoutés
+Thomas a d'ailleurs écrit d'avantage de tests
+Les tests sont pertinents et correspondent à la description associée
+Au moins un outil d'analyse a été utilisé
+Thomas en a utilisé au moins trois différents et a réalisé des comparaisons avec et sans pub.
+L'audit est pertinent et met en avant les forces et faiblesse de chaque site
+Des solutions pour améliorer la performance ont étés apportées
+Thomas est capable d'expliquer comment fonctionne le code de l'application
+Les deux bugs de la première étape ont été corrigés
+3. Assessment of the student’s delivery of the presentation and whether they meet the presentation guidelines:
+
+La présentation de Thomas était excellente, son écran était séparé en deux parties, le code et le powerpoint pour pouvoir suivre plus facilement les différente partie de la présentation.
+Le Q&A s'est très bien déroulé.
+
+4. Assessment of the student's newly acquired skills:
+
+Thomas est capable de : 
+
+Mettre en oeuvre des tests unitaires et fonctionnels dans une application web
+Optimiser les performances d'un projet à l'aide des DevTools
+Reprendre en main un projet JavaScript existant
+5. Explain at least one core strength of the work the student has done so far:
+
+Les tests sont cohérents et Thomas a beaucoup travaille a optimiser l'app.
+
+6. Explain at least one area in which the student’s work needs to improve:
+
+Un soucis de driver linux pose problème au partage d’écran via navigateurs, rien de bien grave, cependant.
