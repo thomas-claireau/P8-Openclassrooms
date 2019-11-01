@@ -89,3 +89,8 @@ Les tests sont cohérents et Thomas a beaucoup travaille a optimiser l'app.
 6. Explain at least one area in which the student’s work needs to improve:
 
 Un soucis de driver linux pose problème au partage d’écran via navigateurs, rien de bien grave, cependant.
+
+
+### 🎬 Cliquez sur l'image ci-dessous pour voir la vidéo de soutenance 👇
+
+[![Regarder la vidéo de soutenance](https://img.youtube.com/vi/-4cNaeZQrzk/maxresdefault.jpg)](https://youtu.be/-4cNaeZQrzk)
