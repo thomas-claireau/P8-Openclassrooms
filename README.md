@@ -1,4 +1,4 @@
-# P8-Openclassrooms - Reprenez et améliorez un projet existant
+# P8-Openclassrooms - Reprenez et améliorez un projet existant -
 
 ## Brief du projet
 
